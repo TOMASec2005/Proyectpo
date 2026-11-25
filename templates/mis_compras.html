@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block contenido %}
+<h1>Mis compras</h1>
+<div class="tabla compras">
+<table>
+  <tr><th>Fecha</th><th>Producto</th><th class="num">Cantidad</th><th class="num">Total</th></tr>
+  {% for v in ventas %}
+  <tr><td>{{ v.Fecha }}</td><td>{{ v.Producto }}</td><td class="num">{{ v.Cantidad }}</td><td class="num">{{ v.Total|cop }}</td></tr>
+  {% else %}
+  <tr><td colspan="4">Aún no has comprado nada.</td></tr>
+  {% endfor %}
+</table>
+</div>
+{% endblock %}

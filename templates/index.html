@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block contenido %}
+<section class="hero">
+  <div>
+    <h1>Nueva colección</h1>
+    <p>Ropa, calzado y accesorios. Compra fácil y segura.</p>
+  </div>
+  <div class="grande">👗 👟 🧥</div>
+</section>
+
+<h2>Productos</h2>
+<div class="productos">
+  {% for p in productos %}
+  <div class="producto">
+    <div class="icono t{{ p.ID % 6 }}">
+      {% if p.Imagen %}<img src="{{ p.Imagen if p.Imagen.startswith('http') else url_for('static', filename='img/' ~ p.Imagen) }}" alt="{{ p.Nombre }}">
+      {% else %}👕{% endif %}
+    </div>
+    <div class="cuerpo">
+      <h3>{{ p.Nombre }}</h3>
+      <div class="precio">{{ p.Precio|cop }}</div>
+      {% if p.Stock > 0 %}
+        <small>Disponibles: {{ p.Stock }}</small>
+        <form method="post" action="{{ url_for('comprar', pid=p.ID) }}">
+          <input type="hidden" name="csrf" value="{{ csrf }}">
+          <input type="number" name="cantidad" value="1" min="1" max="{{ p.Stock }}">
+          <button>Comprar</button>
+        </form>
+      {% else %}
+        <small>Agotado</small>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% if not sesion.email %}<p style="margin-top:28px"><a href="{{ url_for('login') }}">Ingresa</a> o <a href="{{ url_for('registro') }}">crea una cuenta</a> para comprar.</p>{% endif %}
+{% endblock %}

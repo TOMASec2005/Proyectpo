@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="dividido">
+  <div class="lado">
+    <div class="grande">👗</div>
+    <h2>Bienvenido a ModaViva</h2>
+    <p>Ingresa para comprar y ver tus pedidos. Si eres administrador, entrarás directo al panel de ventas.</p>
+  </div>
+  <form method="post">
+    <h1>Ingresar</h1>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Correo</label><input type="email" name="email" required autofocus>
+    <label>Contraseña</label><input type="password" name="password" required>
+    <button>Ingresar</button>
+    <p>¿No tienes cuenta? <a href="{{ url_for('registro') }}">Regístrate</a></p>
+  </form>
+</div>
+{% endblock %}

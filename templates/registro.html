@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="dividido">
+  <div class="lado">
+    <div class="grande">🛍️</div>
+    <h2>Crea tu cuenta</h2>
+    <p>Regístrate gratis para comprar en la tienda y consultar tu historial de compras.</p>
+  </div>
+  <form method="post">
+    <h1>Crear cuenta</h1>
+    <input type="hidden" name="csrf" value="{{ csrf }}">
+    <label>Nombre</label><input name="nombre" required autofocus>
+    <label>Correo</label><input type="email" name="email" required>
+    <label>Contraseña (mínimo 6 caracteres)</label><input type="password" name="password" minlength="6" required>
+    <button>Crear cuenta</button>
+    <p>¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Ingresa</a></p>
+  </form>
+</div>
+{% endblock %}
